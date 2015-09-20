@@ -23,7 +23,8 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.js?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' }
+            { test: /\.js?$/, exclude: /node_modules/, loader: 'babel?cacheDirectory' },
+            { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
     },
     plugins: [
