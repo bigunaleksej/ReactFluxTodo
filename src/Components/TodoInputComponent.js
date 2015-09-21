@@ -6,7 +6,9 @@ const ENTER_KEY_CODE = 13;
 class TodoInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.getInitialState();
+        this.state = {
+            value: this.props.value || ''
+        };
     }
 
     render() {
@@ -22,12 +24,6 @@ class TodoInput extends React.Component {
                 autoFocus={true}
                 />
         );
-    }
-
-    getInitialState() {
-        return {
-            value: this.props.value || ''
-        };
     }
 
     _save() {

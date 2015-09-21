@@ -1,11 +1,10 @@
 'use strict';
 import React from 'react';
 import TodoItem from './TodoItemComponent';
-import TodoActions from '../Actions/TodoActions';
 
 class TodoList extends React.Component {
     render() {
-        var allTodos = this.props.allTodos,
+        var allTodos = this.props.todo,
             todos = [];
 
         if (Object.keys(allTodos).length < 1) {
@@ -17,7 +16,8 @@ class TodoList extends React.Component {
                 <TodoItem
                     key={key}
                     todo={allTodos[key]}
-                />
+                    actions={this.props.actions}
+                    />
             );
         }
 
@@ -33,9 +33,8 @@ class TodoList extends React.Component {
             </section>
         );
     }
-
     _onToggleCompleteAll() {
-        TodoActions.toggleCompleteAll();
+        this.props.actions.toggleCompleteAll();
     }
 }
 

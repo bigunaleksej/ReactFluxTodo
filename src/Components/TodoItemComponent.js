@@ -1,12 +1,11 @@
 'use strict';
 import React from 'react';
 import TodoInput from './TodoInputComponent';
-import TodoActions from '../Actions/TodoActions';
 import classNames from 'classnames';
 
 class TodoItem extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props,context);
         this.state = {
             isEditing: false
         };
@@ -15,7 +14,7 @@ class TodoItem extends React.Component {
     render() {
         var todo = this.props.todo,
             classNameString = classNames({
-                'completed': todo.complete,
+                'completed': todo.completed,
                 'editing': this.state.isEditing
             }),
             input;
@@ -24,7 +23,7 @@ class TodoItem extends React.Component {
             input =
                 <TodoInput
                     className="edit"
-                    onSave={this._onSave}
+                    onSave={(text) => this._onSave(text) }
                     value={todo.text}
                     />;
         }
@@ -37,7 +36,7 @@ class TodoItem extends React.Component {
                     <input
                         className="toggle"
                         type="checkbox"
-                        checked={todo.complete}
+                        checked={todo.completed}
                         onChange={() => { this._onToggleComplete() }}
                         />
                     <label onDoubleClick={() => { this._onDoubleClick() }}>
@@ -53,7 +52,7 @@ class TodoItem extends React.Component {
     }
 
     _onToggleComplete() {
-        TodoActions.toggleComplete(this.props.todo);
+        this.props.actions.toggleComplete(this.props.todo);
     }
 
     _onDoubleClick() {
@@ -61,12 +60,12 @@ class TodoItem extends React.Component {
     }
 
     _onSave(text) {
-        TodoActions.updateText(this.props.todo.id, text);
+        this.props.actions.updateText(this.props.todo.id, text);
         this.setState({isEditing: false});
     }
 
     _onDestroyClick() {
-        TodoActions.destroy(this.props.todo.id);
+        this.props.actions.destroy(this.props.todo.id);
     }
 }
 

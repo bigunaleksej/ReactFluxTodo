@@ -1,7 +1,6 @@
 'use strict';
 import React from 'react';
 import TodoInput from './TodoInputComponent';
-import TodoActions from '../Actions/TodoActions';
 
 class Header extends React.Component {
     render() {
@@ -11,14 +10,15 @@ class Header extends React.Component {
                 <TodoInput
                     id="new-todo"
                     placeholder="What needs to be done?"
-                    onSave={this._onSave}
+                    onSave={(text) => { this._onSave(text) }}
                     />
             </header>
         );
     }
+
     _onSave(text) {
-        if (text.trim()){
-            TodoActions.create(text);
+        if (text.trim()) {
+            this.props.addTodo(text);
         }
     }
 }

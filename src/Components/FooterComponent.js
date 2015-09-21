@@ -1,10 +1,9 @@
 'use strict';
 import React from 'react';
-import TodoActions from '../Actions/TodoActions';
 
 class Footer extends React.Component {
     render() {
-        var allTodos = this.props.allTodos,
+        var allTodos = this.props.todo,
             total = Object.keys(allTodos).length,
             completed = 0,
             clearCompletedButton,
@@ -16,7 +15,7 @@ class Footer extends React.Component {
         }
 
         for (var key in allTodos) {
-            if (allTodos[key].complete) {
+            if (allTodos[key].completed) {
                 completed++;
             }
         }
@@ -25,7 +24,7 @@ class Footer extends React.Component {
             clearCompletedButton =
                 <button
                     id="clear-completed"
-                    onClick={this._onClearCompletedClick}>
+                    onClick={() => { this._onClearCompletedClick() }}>
                     Clear completed ({completed})
                 </button>;
         }
@@ -48,7 +47,7 @@ class Footer extends React.Component {
     }
 
     _onClearCompletedClick() {
-        TodoActions.destroyCompleted();
+        this.props.actions.destroyCompleted();
     }
 }
 

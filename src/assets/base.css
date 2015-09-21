@@ -38,7 +38,7 @@ input[type="checkbox"] {
   outline: none;
 }
 
-#react-flux-todo {
+#react-redux-todo {
 	background: #fff;
 	background: rgba(255, 255, 255, 0.9);
 	margin: 130px 0 40px 0;
@@ -50,7 +50,7 @@ input[type="checkbox"] {
 				0 25px 50px 0 rgba(0, 0, 0, 0.15);
 }
 
-#react-flux-todo:before {
+#react-redux-todo:before {
 	content: '';
 	border-left: 1px solid #f5d6d6;
 	border-right: 1px solid #f5d6d6;
@@ -61,16 +61,16 @@ input[type="checkbox"] {
 	height: 100%;
 }
 
-#react-flux-todo input::-webkit-input-placeholder {
+#react-redux-todo input::-webkit-input-placeholder {
 	font-style: italic;
 }
 
-#react-flux-todo input::-moz-placeholder {
+#react-redux-todo input::-moz-placeholder {
 	font-style: italic;
 	color: #a9a9a9;
 }
 
-#react-flux-todo h1 {
+#react-redux-todo h1 {
 	position: absolute;
 	top: -120px;
 	width: 100%;
@@ -549,7 +549,7 @@ hr {
 		left: 8px;
 	}
 
-	.learn-bar #react-flux-todo {
+	.learn-bar #react-redux-todo {
 		width: 550px;
 		margin: 130px auto 40px auto;
 	}

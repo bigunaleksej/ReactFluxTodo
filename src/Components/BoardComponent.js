@@ -1,44 +1,31 @@
 'use strict';
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import TodoList from './TodoListComponent';
-import TodoStore from '../Stores/TodoStore';
+import TodoActions from '../Actions/TodoActions'
 
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = this.getTodoState();
-    }
-
-    getTodoState() {
-        return {
-            allTodos: TodoStore.getAll(),
-            areAllComplete: TodoStore.areAllComplete()
-        };
-    }
-
-    componentDidMount() {
-        TodoStore.addChangeListener(() => { this._onChange() });
-    }
-
     render() {
+        const { todo, dispatch } = this.props;
+        const actions = bindActionCreators(TodoActions, dispatch);
+
         return (
             <div>
-                <Header />
-                <TodoList
-                    allTodos={this.state.allTodos}
-                    areAllComplete={this.state.areAllComplete}
-                    />
-                <Footer
-                    allTodos={this.state.allTodos}
-                    />
+                <Header addTodo={actions.create} />
+                <TodoList todo={todo} actions={actions} />
+                <Footer todo={todo} actions={actions} />
             </div>
         );
     }
-    _onChange() {
-        this.setState(this.getTodoState());
-    }
 }
 
-export default Board;
+function mapStateToProps(state) {
+    return {
+        todo: state.todo
+    };
+}
+
+export default connect(mapStateToProps)(Board);
