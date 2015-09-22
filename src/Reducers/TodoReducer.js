@@ -8,7 +8,6 @@ const initialState = [];
 function todo(state = initialState, action = {}) {
     switch (action.type) {
         case TodoConstants.TODO_CREATE:
-            console.info('TODO_CREATE');
             return [{
                 id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
                 completed: false,
@@ -16,7 +15,6 @@ function todo(state = initialState, action = {}) {
             }, ...state];
 
         case TodoConstants.TODO_COMPLETE:
-            console.info('TODO_COMPLETE');
             return state.map(todo =>
                     todo.id === action.id ?
                         assign({}, todo, { completed: !todo.completed }) :
@@ -24,28 +22,23 @@ function todo(state = initialState, action = {}) {
             );
 
         case TodoConstants.TODO_DESTROY:
-            console.info('TODO_DESTROY');
             return state.filter(todo =>
                 todo.id !== action.id
             );
 
         case TodoConstants.TODO_DESTROY_COMPLETED:
-            console.info('TODO_DESTROY_COMPLETED');
             return state.filter(todo => todo.completed === false);
 
         case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
-            console.info('TODO_TOGGLE_COMPLETE_ALL');
             const areAllMarked = state.every(todo => todo.completed);
             return state.map(todo => assign({}, todo, {
                 completed: !areAllMarked
             }));
 
         case TodoConstants.TODO_UNDO_COMPLETE:
-            console.info('TODO_UNDO_COMPLETE');
             return state.filter(todo => todo.completed === false);
 
         case TodoConstants.TODO_UPDATE_TEXT:
-            console.info('TODO_UPDATE_TEXT');
             return state.map(todo =>
                     todo.id === action.id ?
                         assign({}, todo, { text: action.text }) :
